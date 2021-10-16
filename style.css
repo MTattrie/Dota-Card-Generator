@@ -29,18 +29,25 @@ body{
 
 #card img{
     display: block;
-    width: 180px;
     max-height: 200px;
     position: relative;
     margin: 20px auto;
+}
+
+#icon {
+    display: flex;
+    max-width: 80%;
+    max-height: 80%;
+    position: relative;
+    margin: 0px 0px;
 }
 
 .hp {
     width: 80px;
     background-color: #ffffff;
     text-align: center;
-    padding: 8px 0;
-    border-radius: 30px;
+    padding: 3px 0;
+    border-radius: 100%;
     margin-left: auto;
     font-weight: 400;
 }
