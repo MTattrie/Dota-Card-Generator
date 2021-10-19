@@ -29,15 +29,15 @@ fetch(url + "api/heroStats")
 async function fetchHeroStats() {
   let response = await fetch(url + "/api/heroStats");
 
-  console.log(response.status); // 200
-  console.log(response.statusText); // OK
+  //console.log(response.status); // 200
+  //console.log(response.statusText); // OK
 
   if (response.status === 200) {
     // handle data
     let data = await response.json();
     heroData = data;
-    console.log("fetchHeroStats - heroData");
-    console.log(heroData);
+    //console.log("fetchHeroStats - heroData");
+    //console.log(heroData);
     getDotaData();
   }
 }
@@ -46,14 +46,12 @@ async function fetchHeroStats() {
 let getDotaData = () => {
   // Generate random # between 0 and 120 (change to const for max# heroes)
   let id = Math.floor(Math.random() * 121);
-  //console.log(id);
   generateCard(id);
 };
 
-// Generate card
+// Generate card data based on randomized id
 let generateCard = (id) => {
   // Get necessary data and assign it to variables
-  console.log("generateCard - id: " + id);
   const heroName = heroData[id].localized_name;
   const imgSrc = url + heroData[id].img;
   const iconSrc = url + heroData[id].icon;
@@ -71,8 +69,6 @@ let generateCard = (id) => {
 
   // Set themeColor based on primary attribute (agi/int/str) type r/g/b
   const themeColor = attributeColor[primary_attr];
-  console.log("theme color:");
-  console.log(themeColor);
 
   card.innerHTML = `
     <h2 class="dota-name">${heroName}</h2>
@@ -126,7 +122,6 @@ let appendAttribute = (attr) => {
 
 let appendRoles = (roles) => {
   let x = 0;
-  console.log(roles);
   roles.forEach((item) => {
     if (x % 3 == 0) {
       let br = document.createElement("br");
