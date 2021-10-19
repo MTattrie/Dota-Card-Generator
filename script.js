@@ -1,7 +1,7 @@
 const attributeColor = {
   agi: "#025e10",
   int: "#2b79ff",
-  str: "#8c1c06"
+  str: "#8c1c06",
 };
 
 const url = "https://api.opendota.com";
@@ -9,6 +9,8 @@ const card = document.getElementById("card");
 const btn = document.getElementById("btn");
 
 var heroData = [];
+
+// fetch data on load
 fetchHeroStats();
 
 /**
@@ -36,6 +38,7 @@ async function fetchHeroStats() {
     heroData = data;
     console.log("fetchHeroStats - heroData");
     console.log(heroData);
+    getDotaData();
   }
 }
 
@@ -65,22 +68,19 @@ let generateCard = (id) => {
   const base_mr = heroData[id].base_mr;
   const move_speed = heroData[id].move_speed;
   const primary_attr = heroData[id].primary_attr;
- 
-  
+
   // Set themeColor based on primary attribute (agi/int/str) type r/g/b
   const themeColor = attributeColor[primary_attr];
   console.log("theme color:");
   console.log(themeColor);
 
-
-
   card.innerHTML = `
-    <p class="hp">
+    <h2 class="dota-name">${heroName}</h2>
+    <p class="icon">
         <img id="icon" src=${iconSrc} alt=${heroName} />
     </p>
     <img src=${imgSrc} alt=${heroName}/>
-    <h2 class="dota-name">${heroName}</h2>
-    <div class="attribute">${primary_attr}</div>
+    <div class="attribute"></div>
     <h3>Roles:</h2>
     <div class="roles">
         
@@ -101,17 +101,35 @@ let generateCard = (id) => {
     </div>
   
   `;
+  appendAttribute(primary_attr);
   appendRoles(roles);
   styleCard(themeColor);
+};
+
+let appendAttribute = (attr) => {
+  var img = new Image();
+  switch (attr) {
+    case "agi":
+      img.src = "images/agi.png";
+      break;
+    case "int":
+      img.src = "images/int.png";
+      break;
+    case "str":
+      img.src = "images/str.png";
+      break;
+    default:
+      img.src = "imagesattributes_all.png";
+  }
+  document.getElementsByClassName("attribute")[0].appendChild(img);
 };
 
 let appendRoles = (roles) => {
   let x = 0;
   console.log(roles);
   roles.forEach((item) => {
-    if(x%3 == 0){
+    if (x % 3 == 0) {
       let br = document.createElement("br");
-      document.querySelector(".roles").appendChild(br);
       document.querySelector(".roles").appendChild(br);
     }
     let span = document.createElement("SPAN");
@@ -123,7 +141,7 @@ let appendRoles = (roles) => {
 
 let styleCard = (color) => {
   card.style.background = `radial-gradient(circle at 50% 0%, ${color} 36%, #ffffff 36%)`;
-  card.querySelectorAll(".roles span").forEach(roles => {
+  card.querySelectorAll(".roles span").forEach((roles) => {
     roles.style.backgroundColor = color;
   });
 };
