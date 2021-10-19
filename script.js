@@ -1,3 +1,9 @@
+const attributeColor = {
+  agi: "#025e10",
+  int: "#2b79ff",
+  str: "#8c1c06"
+};
+
 const url = "https://api.opendota.com";
 const card = document.getElementById("card");
 const btn = document.getElementById("btn");
@@ -58,7 +64,69 @@ let generateCard = (id) => {
   const base_armor = heroData[id].base_armor;
   const base_mr = heroData[id].base_mr;
   const move_speed = heroData[id].move_speed;
-}
+  const primary_attr = heroData[id].primary_attr;
+ 
+  
+  // Set themeColor based on primary attribute (agi/int/str) type r/g/b
+  const themeColor = attributeColor[primary_attr];
+  console.log("theme color:");
+  console.log(themeColor);
+
+
+
+  card.innerHTML = `
+    <p class="hp">
+        <img id="icon" src=${iconSrc} alt=${heroName} />
+    </p>
+    <img src=${imgSrc} alt=${heroName}/>
+    <h2 class="dota-name">${heroName}</h2>
+    <div class="attribute">${primary_attr}</div>
+    <h3>Roles:</h2>
+    <div class="roles">
+        
+    </div>
+    <div class="stats">
+        <div>
+            <h3>Str</h3>
+            <p>${base_str}</p>
+        </div>
+        <div>
+            <h3>Agi</h3>
+            <p>${base_agi}</p>
+        </div>
+        <div>
+            <h3>Int</h3>
+            <p>${base_int}</p>
+        </div>
+    </div>
+  
+  `;
+  appendRoles(roles);
+  styleCard(themeColor);
+};
+
+let appendRoles = (roles) => {
+  let x = 0;
+  console.log(roles);
+  roles.forEach((item) => {
+    if(x%3 == 0){
+      let br = document.createElement("br");
+      document.querySelector(".roles").appendChild(br);
+      document.querySelector(".roles").appendChild(br);
+    }
+    let span = document.createElement("SPAN");
+    span.textContent = item;
+    document.querySelector(".roles").appendChild(span);
+    x++;
+  });
+};
+
+let styleCard = (color) => {
+  card.style.background = `radial-gradient(circle at 50% 0%, ${color} 36%, #ffffff 36%)`;
+  card.querySelectorAll(".roles span").forEach(roles => {
+    roles.style.backgroundColor = color;
+  });
+};
 
 // window.addEventListener("load", fetchDotaData);
 btn.addEventListener("click", getDotaData);
