@@ -2,7 +2,7 @@ const attributeColor = {
   agi: "#025e10",
   int: "#2b79ff",
   str: "#8c1c06",
-  all: "#C8A4D4"
+  all: "#C8A4D4",
 };
 
 const url = "https://api.opendota.com";
