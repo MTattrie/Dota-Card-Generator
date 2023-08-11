@@ -7,6 +7,10 @@ Initial look at the project: <br>
 Current State: <br>
 ![current project state](images/dota-card-generator-2.png)
 
+**Update** - Aug 2023
+Added Universal (all) attribute and fixed default images.
+![universal atr](images/universal_all_update.png)
+
 ### TODO
 - add other unused stats: armor, magic resist, attack type, movement speed
 - stylize newly added stats
