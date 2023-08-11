@@ -2,11 +2,13 @@ const attributeColor = {
   agi: "#025e10",
   int: "#2b79ff",
   str: "#8c1c06",
+  universal: "#C8A4D4"
 };
 
 const url = "https://api.opendota.com";
 const card = document.getElementById("card");
 const btn = document.getElementById("btn");
+const TOTAL_NUM_HEROS = 124;
 
 var heroData = [];
 
@@ -45,7 +47,7 @@ async function fetchHeroStats() {
 // randomize data
 let getDotaData = () => {
   // Generate random # between 0 and 120 (change to const for max# heroes)
-  let id = Math.floor(Math.random() * 121);
+  let id = Math.floor(Math.random() * TOTAL_NUM_HEROS);
   generateCard(id);
 };
 
@@ -114,8 +116,11 @@ let appendAttribute = (attr) => {
     case "str":
       img.src = "images/str.png";
       break;
+    case "all":
+      img.src = "images/universal.png";
+      break;
     default:
-      img.src = "imagesattributes_all.png";
+      img.src = "images/attributes_all.png";
   }
   document.getElementsByClassName("attribute")[0].appendChild(img);
 };
