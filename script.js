@@ -6,6 +6,7 @@ const attributeColor = {
 };
 
 const url = "https://api.opendota.com";
+const imgURL = "https://cdn.cloudflare.steamstatic.com"
 const card = document.getElementById("card");
 const btn = document.getElementById("btn");
 const TOTAL_NUM_HEROS = 124;
@@ -55,8 +56,8 @@ let getDotaData = () => {
 let generateCard = (id) => {
   // Get necessary data and assign it to variables
   const heroName = heroData[id].localized_name;
-  const imgSrc = url + heroData[id].img;
-  const iconSrc = url + heroData[id].icon;
+  const imgSrc = imgURL + heroData[id].img;
+  const iconSrc = imgURL + heroData[id].icon;
   const attack_type = heroData[id].img;
   const base_agi = heroData[id].base_agi;
   const base_int = heroData[id].base_int;
